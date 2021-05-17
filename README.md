@@ -5,7 +5,7 @@ Based on: [docker-compose-laravel](https://github.com/aschmelyun/docker-compose-
 You only need to run the following commands once!
 
 - Clone the repo
-- Run `cd aero-setup`
+- Run `cd aero-commerce-docker`
 - Run `docker-compose up -d`
 
 The following are built for our web server, with their exposed ports detailed:
