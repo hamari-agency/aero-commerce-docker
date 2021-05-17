@@ -42,6 +42,7 @@ You only need to run the following commands once!
 - Run `rm -r project` to remove the `project` folder.
 
 - Run `php artisan aero:install` to start installing Aero.
+- Run `chown -R aero:aero .` to set correct permissions.
 - Run `exit` to exit the php container.
 
 You should now be able to visit localhost and see the default site. If you cannot see the site/get an nginx error restart with `docker-compose restart`
@@ -63,12 +64,6 @@ You should now be able to visit localhost and see the default site. If you canno
 - username: `admin@example.com`
 - password: `aerocommerce`
 
-## Docker Play
-
-If you want to test it on [https://labs.play-with-docker.com](https://labs.play-with-docker.com) then you will need to do the following:
-
-- Run `docker exec -it php bash` to run commands in the php container.
-- Run `chmod -R 777 /var/www/html/storage/` to set file permissions.
 ## Post installation usage
 
 - Run `docker-compose up -d` to start the server.
