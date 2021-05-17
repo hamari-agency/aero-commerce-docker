@@ -1,0 +1,80 @@
+version: "3"
+
+networks:
+  aero:
+
+services:
+  site:
+    build:
+      context: .
+      dockerfile: nginx.dockerfile
+    container_name: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./src:/var/www/html:delegated
+    depends_on:
+      - php
+      - redis
+      - mysql
+      - mailhog
+      - elasticsearch
+    networks:
+      - aero
+
+  mysql:
+    image: mysql:5.7.29
+    container_name: mysql
+    restart: unless-stopped
+    tty: true
+    ports:
+      - 3336:3306
+    environment:
+      MYSQL_DATABASE: aero
+      MYSQL_USER: aero
+      MYSQL_PASSWORD: aero
+      MYSQL_ROOT_PASSWORD: aero
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - aero
+    volumes:
+      - ./mysql:/var/lib/mysql
+
+  php:
+    build:
+      context: .
+      dockerfile: php.dockerfile
+    container_name: php
+    volumes:
+      - ./src:/var/www/html:delegated
+    networks:
+      - aero
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    restart: unless-stopped
+    ports:
+      - 6379:6379
+    networks:
+      - aero
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: mailhog
+    ports:
+      - 1025:1025
+      - 8025:8025
+    networks:
+      - aero
+
+  elasticsearch:
+    image: elasticsearch:6.8.15
+    container_name: elasticsearch
+    ports:
+      - 9200:9200
+    environment:
+      discovery.type: single-node
+    networks:
+      - aero
