@@ -73,6 +73,8 @@ You should now be able to visit localhost and see the default site. If you canno
 
 For example to view a list of all available Artisan commands from outside the container, run `docker exec -it php php artisan list`.
 
+Or to re-index Elasticsearch, run `docker exec -it php php artisan aero:search:rebuild`.
+
 ## MailHog
 
 The current version of Laravel (8 as of today) uses MailHog as the default application for testing email sending and general SMTP work during local development. Using the provided Docker Hub image, getting an instance set up and ready is simple and straight-forward. The service is included in the `docker-compose.yml` file, and spins up alongside the webserver and database services.
