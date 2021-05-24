@@ -50,6 +50,7 @@ You should now be able to visit localhost and see the default site. If you canno
 ## To use Redis for cache:
 
 - Open `src/.env` and set `CACHE_DRIVER=redis` and `REDIS_HOST=redis`.
+- Run `docker exec -it php php artisan config:cache` to clear config cache.
 - Restart Docker `docker-compose restart`.
 
 ## Populate the catalog:
@@ -78,5 +79,12 @@ Or to re-index Elasticsearch, run `docker exec -it php php artisan aero:search:r
 ## MailHog
 
 The current version of Laravel (8 as of today) uses MailHog as the default application for testing email sending and general SMTP work during local development. Using the provided Docker Hub image, getting an instance set up and ready is simple and straight-forward. The service is included in the `docker-compose.yml` file, and spins up alongside the webserver and database services.
+
+- To test MailHog open `src/.env` and set:
+  - `MAIL_HOST=mailhog`
+  - `MAIL_PORT=1025`
+  - `MAIL_FROM_ADDRESS=<your_email_address>`
+- Run `docker exec -it php php artisan config:cache` to clear config cache.
+- Restart Docker `docker-compose restart`.
 
 To see the dashboard and view any emails coming through the system, visit [localhost:8025](http://localhost:8025).
