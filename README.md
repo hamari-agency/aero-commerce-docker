@@ -21,7 +21,7 @@ The following are built for our web server, with their exposed ports detailed:
 You only need to run the following commands once!
 
 - Run `rm src/.gitkeep` to make `src` empty (aero will not install if the directory is not empty).
-- Run `docker exec -it php bash` to run commands in the php container.
+- Run `docker exec -it aero_php bash` to run commands in the php container.
 - Run `composer require aerocommerce/cli` to install Aero CLI locally.
 - Run `vendor/aerocommerce/cli/aero new --no-install` to start the process of installing Aero Commerce.
 
@@ -50,12 +50,12 @@ You should now be able to visit localhost and see the default site. If you canno
 ## To use Redis for cache:
 
 - Open `src/.env` and set `CACHE_DRIVER=redis` and `REDIS_HOST=redis`.
-- Run `docker exec -it php php artisan config:cache` to clear config cache.
+- Run `docker exec -it aero_php php artisan config:cache` to clear config cache.
 - Restart Docker `docker-compose restart`.
 
 ## Populate the catalog:
 
-- Run `docker exec -it php bash` to run commands in the php container.
+- Run `docker exec -it aero_php bash` to run commands in the php container.
 - Run `php artisan aero:import:products:csv https://aero-data.s3.eu-west-2.amazonaws.com/products.csv`
 - Elastic search may need rebuilding `php artisan aero:search:rebuild`
 
@@ -72,9 +72,9 @@ You should now be able to visit localhost and see the default site. If you canno
 
 ## How to run artisan commands from outside the container:
 
-For example to view a list of all available Artisan commands from outside the container, run `docker exec -it php php artisan list`.
+For example to view a list of all available Artisan commands from outside the container, run `docker exec -it aero_php php artisan list`.
 
-Or to re-index Elasticsearch, run `docker exec -it php php artisan aero:search:rebuild`.
+Or to re-index Elasticsearch, run `docker exec -it aero_php php artisan aero:search:rebuild`.
 
 ## MailHog
 
@@ -84,7 +84,7 @@ The current version of Laravel (8 as of today) uses MailHog as the default appli
   - `MAIL_HOST=mailhog`
   - `MAIL_PORT=1025`
   - `MAIL_FROM_ADDRESS=<your_email_address>`
-- Run `docker exec -it php php artisan config:cache` to clear config cache.
+- Run `docker exec -it aero_php php artisan config:cache` to clear config cache.
 - Restart Docker `docker-compose restart`.
 
 To see the dashboard and view any emails coming through the system, visit [localhost:8025](http://localhost:8025).
