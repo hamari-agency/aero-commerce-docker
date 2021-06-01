@@ -14,6 +14,7 @@ The following are built for our web server, with their exposed ports detailed:
 - **mysql** - `:3306`
 - **php** - `:9000`
 - **redis** - `:6379`
+- **elasticsearch** - `:9200`
 - **mailhog** - `:8025` 
 
 ## Install Project via Aero CLI
