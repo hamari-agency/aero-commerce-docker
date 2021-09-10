@@ -74,9 +74,16 @@ services:
   elasticsearch:
     image: elasticsearch:6.8.15
     container_name: aero_elasticsearch
+    restart: unless-stopped
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
     environment:
       discovery.type: single-node
     networks:
       - aero
+
+volumes:
+  esdata:
+    driver: local
